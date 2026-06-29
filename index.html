@@ -7,25 +7,21 @@
 <meta name="description" content="Vincent Beausoleil — Data Scientist / Data Analyst. Mathématiques, statistiques, séries temporelles, optimisation et BI. Disponible septembre 2026." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0B0F17;
-    --surface:#121925;
-    --surface-2:#1A2333;
-    --line:rgba(255,255,255,.07);
-    --grid:rgba(138,160,255,.07);
-    --text:#EAEFF6;
-    --muted:#94A2B6;
-    --indigo:#8AA0FF;
-    --indigo-deep:#5E78E6;
-    --amber:#F2B66D;
-    --good:#5EE6B5;
-    --font-display:'Space Grotesk',system-ui,sans-serif;
-    --font-body:'Inter',system-ui,sans-serif;
+    --paper:#FAFAF8;
+    --ink:#16181C;
+    --muted:#6C7077;
+    --faint:#9AA0A6;
+    --line:#E7E6E1;
+    --line-strong:#D7D6D0;
+    --accent:#2845D6;
+    --accent-soft:#EEF1FE;
+    --font-serif:'Fraunces',Georgia,serif;
+    --font-sans:'Inter',system-ui,sans-serif;
     --font-mono:'JetBrains Mono',ui-monospace,monospace;
-    --r:14px;
-    --maxw:1140px;
+    --maxw:1080px;
   }
 
   *{box-sizing:border-box;margin:0;padding:0}
@@ -33,257 +29,141 @@
   @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
   body{
-    font-family:var(--font-body);
-    background:var(--bg);
-    color:var(--text);
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
+    font-family:var(--font-sans);background:var(--paper);color:var(--ink);
+    line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;
   }
+  /* halo lumineux très discret */
   body::before{
-    content:"";
-    position:fixed;inset:0;z-index:0;pointer-events:none;
-    background-image:
-      linear-gradient(var(--grid) 1px,transparent 1px),
-      linear-gradient(90deg,var(--grid) 1px,transparent 1px);
-    background-size:46px 46px;
-    mask-image:radial-gradient(ellipse 90% 70% at 50% 0%,#000 0%,transparent 80%);
-    -webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 0%,#000 0%,transparent 80%);
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(70% 50% at 50% -10%,rgba(255,255,255,.9),transparent 60%);
   }
 
   a{color:inherit;text-decoration:none}
-  ::selection{background:rgba(138,160,255,.3)}
+  ::selection{background:var(--accent-soft)}
 
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;position:relative;z-index:1}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:1}
 
-  .mono{font-family:var(--font-mono)}
   .eyebrow{
-    font-family:var(--font-mono);font-size:.72rem;letter-spacing:.22em;
-    text-transform:uppercase;color:var(--indigo);
-    display:inline-flex;align-items:center;gap:10px;
+    font-family:var(--font-mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--accent);display:inline-flex;align-items:center;gap:11px;
   }
-  .eyebrow::before{content:"";width:26px;height:1px;background:var(--indigo);opacity:.6}
+  .eyebrow::before{content:"";width:18px;height:1px;background:var(--accent)}
 
-  h1,h2,h3{font-family:var(--font-display);font-weight:600;line-height:1.1;letter-spacing:-.02em}
+  h1,h2,h3{font-family:var(--font-serif);font-weight:500;line-height:1.04;letter-spacing:-.015em}
 
   /* ---------- NAV ---------- */
-  nav{
-    position:fixed;top:0;left:0;right:0;z-index:50;
-    backdrop-filter:blur(12px);
-    background:rgba(11,15,23,.72);
-    border-bottom:1px solid transparent;
-    transition:border-color .3s,background .3s;
-  }
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(250,250,248,.8);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .3s}
   nav.scrolled{border-bottom:1px solid var(--line)}
-  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
-  .logo{font-family:var(--font-mono);font-weight:600;font-size:.95rem;letter-spacing:.02em}
-  .logo b{color:var(--indigo);font-weight:600}
-  .nav-links{display:flex;gap:6px;align-items:center}
-  .nav-links a{
-    font-size:.86rem;color:var(--muted);padding:8px 12px;border-radius:8px;
-    transition:color .2s,background .2s;
-  }
-  .nav-links a:hover{color:var(--text);background:rgba(255,255,255,.04)}
-  .nav-links a.active{color:var(--indigo)}
-  .nav-cta{
-    font-family:var(--font-mono);font-size:.8rem;color:var(--bg)!important;
-    background:var(--indigo);padding:9px 16px!important;border-radius:8px;font-weight:600;
-    transition:transform .2s,box-shadow .2s;
-  }
-  .nav-cta:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(138,160,255,.3);background:var(--indigo)}
-  .burger{display:none;background:none;border:1px solid var(--line);border-radius:8px;width:42px;height:38px;cursor:pointer;flex-direction:column;gap:5px;align-items:center;justify-content:center}
-  .burger span{width:18px;height:2px;background:var(--text);transition:.25s}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{font-family:var(--font-serif);font-size:1.05rem;font-weight:600;letter-spacing:-.01em}
+  .nav-links{display:flex;gap:2px;align-items:center}
+  .nav-links a{font-size:.85rem;color:var(--muted);padding:8px 13px;border-radius:6px;transition:color .2s}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-links a.active{color:var(--ink)}
+  .nav-links a.active::after{content:"";display:block;width:4px;height:4px;border-radius:50%;background:var(--accent);margin:2px auto 0}
+  .nav-cta{font-family:var(--font-mono);font-size:.78rem;color:#fff!important;background:var(--ink);padding:9px 17px!important;border-radius:7px;transition:opacity .2s}
+  .nav-cta:hover{opacity:.85}
+  .burger{display:none;background:none;border:1px solid var(--line-strong);border-radius:7px;width:42px;height:38px;cursor:pointer;flex-direction:column;gap:5px;align-items:center;justify-content:center}
+  .burger span{width:18px;height:1.5px;background:var(--ink);transition:.25s}
 
   /* ---------- HERO ---------- */
-  header{padding:140px 0 70px;position:relative}
-  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:50px;align-items:center}
-  .badge{
-    display:inline-flex;align-items:center;gap:9px;font-family:var(--font-mono);
-    font-size:.76rem;color:var(--good);border:1px solid rgba(94,230,181,.25);
-    background:rgba(94,230,181,.07);padding:6px 13px;border-radius:100px;margin-bottom:26px;
-  }
-  .badge .dot{width:7px;height:7px;border-radius:50%;background:var(--good);box-shadow:0 0 0 0 rgba(94,230,181,.5);animation:pulse 2.4s infinite}
-  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(94,230,181,.45)}70%{box-shadow:0 0 0 8px rgba(94,230,181,0)}100%{box-shadow:0 0 0 0 rgba(94,230,181,0)}}
+  header{padding:168px 0 96px}
+  .avail{font-family:var(--font-mono);font-size:.78rem;color:var(--muted);display:inline-flex;align-items:center;gap:9px;margin-bottom:40px}
+  .avail .dot{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+  header h1{font-size:clamp(3.2rem,11vw,7rem);font-weight:500;letter-spacing:-.035em;margin-bottom:30px}
+  .statement{font-family:var(--font-serif);font-style:italic;font-weight:400;font-size:clamp(1.5rem,4.2vw,2.7rem);line-height:1.18;letter-spacing:-.01em;max-width:18ch;margin-bottom:26px;color:var(--ink)}
+  .sub{font-size:1.08rem;color:var(--muted);max-width:54ch;margin-bottom:40px}
+  .sub strong{color:var(--ink);font-weight:600}
+  .cta-row{display:flex;gap:26px;align-items:center;flex-wrap:wrap}
+  .btn-ink{font-family:var(--font-mono);font-size:.84rem;background:var(--ink);color:#fff;padding:14px 26px;border-radius:8px;transition:opacity .2s,transform .2s}
+  .btn-ink:hover{opacity:.88;transform:translateY(-1px)}
+  .link-arrow{font-family:var(--font-mono);font-size:.84rem;color:var(--ink);border-bottom:1px solid var(--line-strong);padding-bottom:3px;transition:border-color .2s}
+  .link-arrow:hover{border-color:var(--ink)}
 
-  header h1{font-size:clamp(2.5rem,6vw,4rem);margin-bottom:6px}
-  .role{font-family:var(--font-display);font-size:clamp(1.1rem,2.4vw,1.5rem);font-weight:500;color:var(--indigo);margin-bottom:22px}
-  .role .amp{color:var(--amber)}
-  .lede{color:var(--muted);font-size:1.05rem;max-width:46ch;margin-bottom:14px}
-  .lede strong{color:var(--text);font-weight:600}
-  .hero-tags{font-family:var(--font-mono);font-size:.82rem;color:var(--muted);margin-bottom:30px}
-  .hero-tags span{color:var(--amber)}
-  .cta-row{display:flex;gap:14px;flex-wrap:wrap}
-  .btn{
-    display:inline-flex;align-items:center;gap:9px;font-family:var(--font-mono);font-size:.86rem;
-    padding:13px 22px;border-radius:10px;font-weight:600;transition:transform .2s,box-shadow .2s,border-color .2s,background .2s;cursor:pointer;border:1px solid transparent;
-  }
-  .btn-primary{background:var(--indigo);color:var(--bg)}
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(138,160,255,.28)}
-  .btn-ghost{border:1px solid var(--line);color:var(--text);background:transparent}
-  .btn-ghost:hover{border-color:var(--indigo);color:var(--indigo);transform:translateY(-2px)}
+  .facts{display:flex;flex-wrap:wrap;gap:14px 30px;margin-top:64px;padding-top:30px;border-top:1px solid var(--line);font-family:var(--font-mono);font-size:.8rem;color:var(--muted)}
+  .facts b{color:var(--ink);font-weight:500}
 
-  /* ---------- HERO PLOT ---------- */
-  .plot{
-    background:linear-gradient(180deg,var(--surface) 0%,rgba(18,25,37,.6) 100%);
-    border:1px solid var(--line);border-radius:18px;padding:20px;position:relative;overflow:hidden;
-  }
-  .plot-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-family:var(--font-mono);font-size:.72rem;color:var(--muted)}
-  .plot-head .live{color:var(--good)}
-  .plot svg{display:block;width:100%;height:auto}
-  .plot-foot{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.68rem;color:var(--muted);margin-top:8px;letter-spacing:.04em}
-  .draw{stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 2.6s ease-out .3s forwards}
-  .draw.f{animation-delay:1.4s;animation-duration:1.8s}
-  @keyframes draw{to{stroke-dashoffset:0}}
-  @media (prefers-reduced-motion:reduce){.draw{animation:none;stroke-dashoffset:0}}
-  .pt{opacity:0;animation:fadeIn .5s ease forwards}
-  @keyframes fadeIn{to{opacity:1}}
-  .pt-pulse{animation:ptpulse 2.6s ease-in-out infinite}
-  @keyframes ptpulse{0%,100%{r:4}50%{r:6.5}}
-
-  /* ---------- METRICS ---------- */
-  .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:64px}
-  .metric{background:var(--bg);padding:26px 22px}
-  .metric .num{font-family:var(--font-display);font-size:2rem;font-weight:600;color:var(--text);letter-spacing:-.02em}
-  .metric .num em{font-style:normal;color:var(--indigo)}
-  .metric .lbl{font-size:.82rem;color:var(--muted);margin-top:4px}
-
-  /* ---------- SECTIONS ---------- */
-  section{padding:96px 0;position:relative}
-  .sec-head{margin-bottom:48px;max-width:560px}
-  .sec-head h2{font-size:clamp(1.8rem,4vw,2.6rem);margin:14px 0 12px}
-  .sec-head p{color:var(--muted)}
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:104px 0;position:relative}
+  .sec-top{border-top:1px solid var(--line)}
+  .sec-head{margin-bottom:56px;max-width:620px}
+  .sec-head h2{font-size:clamp(2rem,5vw,3rem);margin:18px 0 0}
 
   /* ---------- ABOUT ---------- */
-  .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:start}
-  .about-text p{color:var(--muted);margin-bottom:18px}
-  .about-text p strong{color:var(--text);font-weight:600}
-  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
-  .chip{font-family:var(--font-mono);font-size:.76rem;color:var(--text);background:var(--surface);border:1px solid var(--line);padding:6px 12px;border-radius:8px}
-  .chip b{color:var(--amber);font-weight:600}
+  .about-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:60px}
+  .about-grid .label{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+  .about-body p{font-size:1.12rem;color:var(--muted);margin-bottom:20px;line-height:1.7}
+  .about-body p:first-child{font-size:1.28rem;color:var(--ink);font-family:var(--font-serif);font-weight:400;line-height:1.45}
+  .about-body p strong{color:var(--ink);font-weight:600}
 
-  .skills h3{font-size:.82rem;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.18em;color:var(--muted);margin-bottom:22px;font-weight:500}
-  .skill{margin-bottom:18px}
-  .skill-top{display:flex;justify-content:space-between;font-size:.88rem;margin-bottom:7px}
-  .skill-top span:last-child{font-family:var(--font-mono);font-size:.78rem;color:var(--indigo)}
-  .bar{height:6px;background:var(--surface-2);border-radius:100px;overflow:hidden}
-  .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--indigo-deep),var(--indigo));border-radius:100px;transition:width 1.1s cubic-bezier(.2,.7,.2,1)}
-
-  /* ---------- TIMELINE ---------- */
-  .timeline{position:relative;padding-left:30px}
-  .timeline::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:1px;background:linear-gradient(var(--indigo),transparent)}
-  .tl-item{position:relative;margin-bottom:14px}
-  .tl-item::before{content:"";position:absolute;left:-30px;top:24px;width:13px;height:13px;border-radius:50%;background:var(--bg);border:2px solid var(--indigo);transform:translateX(0)}
-  .tl-card{
-    background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
-    padding:24px 26px;transition:border-color .25s,transform .25s,background .25s;
-  }
-  .tl-card:hover{border-color:rgba(138,160,255,.4);transform:translateX(4px);background:var(--surface-2)}
-  .tl-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;align-items:baseline;margin-bottom:6px}
-  .tl-card h3{font-size:1.18rem}
-  .tl-when{font-family:var(--font-mono);font-size:.76rem;color:var(--amber);white-space:nowrap}
-  .tl-org{font-size:.9rem;color:var(--muted);margin-bottom:14px}
-  .tl-card ul{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:16px}
-  .tl-card li{font-size:.92rem;color:var(--muted);padding-left:20px;position:relative}
-  .tl-card li::before{content:"▸";position:absolute;left:0;color:var(--indigo);font-size:.8rem}
-  .tl-card li b{color:var(--text);font-weight:600}
-  .stack-tags{display:flex;flex-wrap:wrap;gap:7px}
-  .tag{font-family:var(--font-mono);font-size:.72rem;color:var(--indigo);background:rgba(138,160,255,.08);border:1px solid rgba(138,160,255,.18);padding:4px 10px;border-radius:7px}
-  .tag.warm{color:var(--amber);background:rgba(242,182,109,.08);border-color:rgba(242,182,109,.2)}
+  /* ---------- EXPERIENCE ---------- */
+  .xp{display:grid;grid-template-columns:200px 1fr;gap:40px;padding:36px 0;border-top:1px solid var(--line)}
+  .xp:last-child{border-bottom:1px solid var(--line)}
+  .xp-meta .yr{font-family:var(--font-mono);font-size:.82rem;color:var(--ink)}
+  .xp-meta .org{font-size:.92rem;color:var(--muted);margin-top:6px}
+  .xp-body h3{font-size:1.4rem;font-weight:600;margin-bottom:16px}
+  .xp-body ul{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:20px}
+  .xp-body li{font-size:.97rem;color:var(--muted);padding-left:22px;position:relative}
+  .xp-body li::before{content:"—";position:absolute;left:0;color:var(--accent)}
+  .xp-body li b{color:var(--ink);font-weight:600}
+  .tags{display:flex;flex-wrap:wrap;gap:8px}
+  .tag{font-family:var(--font-mono);font-size:.72rem;color:var(--muted);border:1px solid var(--line-strong);padding:4px 11px;border-radius:100px}
 
   /* ---------- PROJECTS ---------- */
-  .proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .proj{
-    background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
-    padding:24px;cursor:pointer;transition:transform .25s,border-color .25s,background .25s;
-    display:flex;flex-direction:column;min-height:230px;text-align:left;color:inherit;font:inherit;
-  }
-  .proj:hover{transform:translateY(-5px);border-color:rgba(138,160,255,.4);background:var(--surface-2)}
-  .proj-ico{width:42px;height:42px;border-radius:10px;display:grid;place-items:center;font-size:1.3rem;background:rgba(138,160,255,.1);border:1px solid rgba(138,160,255,.2);margin-bottom:16px}
-  .proj-flag{font-family:var(--font-mono);font-size:.68rem;color:var(--amber);margin-bottom:8px;letter-spacing:.04em}
-  .proj h3{font-size:1.1rem;margin-bottom:9px}
-  .proj p{font-size:.88rem;color:var(--muted);flex:1}
-  .proj-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
-  .proj-tags .tag{font-size:.68rem;padding:3px 8px}
-  .proj-more{font-family:var(--font-mono);font-size:.74rem;color:var(--indigo);margin-top:14px;display:flex;align-items:center;gap:6px}
+  .proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 56px}
+  .proj{padding:32px 0;border-top:1px solid var(--line);transition:padding-left .25s}
+  .proj:hover{padding-left:10px}
+  .proj .cat{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+  .proj h3{font-size:1.45rem;font-weight:500;margin-bottom:12px}
+  .proj p{font-size:.97rem;color:var(--muted);margin-bottom:16px}
 
-  /* ---------- MODAL ---------- */
-  .modal-bg{position:fixed;inset:0;z-index:100;background:rgba(6,9,15,.82);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:24px}
-  .modal-bg.open{display:flex;animation:fadeIn .25s ease}
-  .modal{background:var(--surface);border:1px solid var(--line);border-radius:18px;max-width:620px;width:100%;max-height:88vh;overflow-y:auto;padding:34px}
-  .modal-ico{width:50px;height:50px;border-radius:12px;display:grid;place-items:center;font-size:1.5rem;background:rgba(138,160,255,.1);border:1px solid rgba(138,160,255,.2);margin-bottom:18px}
-  .modal h3{font-size:1.5rem;margin-bottom:6px}
-  .modal .m-sub{font-family:var(--font-mono);font-size:.78rem;color:var(--amber);margin-bottom:22px}
-  .modal h4{font-size:.78rem;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.16em;color:var(--indigo);margin:22px 0 12px}
-  .modal p{color:var(--muted);font-size:.94rem;margin-bottom:10px}
-  .modal ul{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:6px}
-  .modal li{font-size:.92rem;color:var(--muted);padding-left:20px;position:relative}
-  .modal li::before{content:"▸";position:absolute;left:0;color:var(--indigo)}
-  .modal li b{color:var(--text)}
-  .modal-close{position:sticky;top:0;float:right;background:var(--surface-2);border:1px solid var(--line);color:var(--text);width:36px;height:36px;border-radius:9px;cursor:pointer;font-size:1.1rem;line-height:1;margin:-10px -10px 0 0}
-  .modal-close:hover{border-color:var(--indigo);color:var(--indigo)}
+  /* ---------- DISTINCTION ---------- */
+  .dist-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:48px}
+  .dist h3{font-family:var(--font-serif);font-size:1.3rem;font-weight:500;margin:0 0 12px;padding-top:20px;border-top:1px solid var(--line-strong)}
+  .dist p{font-size:.97rem;color:var(--muted)}
 
-  /* ---------- APPROACH ---------- */
-  .approach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .appr{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:28px;transition:border-color .25s,transform .25s}
-  .appr:hover{border-color:rgba(242,182,109,.35);transform:translateY(-4px)}
-  .appr .ic{font-size:1.6rem;margin-bottom:14px}
-  .appr h3{font-size:1.12rem;margin-bottom:9px}
-  .appr p{font-size:.9rem;color:var(--muted)}
-
-  /* ---------- EDUCATION ---------- */
-  .edu{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:14px}
-  .edu-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px}
-  .edu-card .yr{font-family:var(--font-mono);font-size:.74rem;color:var(--amber);margin-bottom:10px}
-  .edu-card h3{font-size:1.02rem;margin-bottom:6px}
-  .edu-card p{font-size:.85rem;color:var(--muted)}
-
-  /* ---------- STACK ---------- */
-  .stack-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .stack-col{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:26px}
-  .stack-col h3{font-size:.8rem;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.14em;color:var(--indigo);margin-bottom:16px;font-weight:500;display:flex;align-items:center;gap:8px}
-  .stack-col.warm h3{color:var(--amber)}
-  .stack-col .items{display:flex;flex-wrap:wrap;gap:8px}
-  .stack-col .items span{font-family:var(--font-mono);font-size:.78rem;color:var(--text);background:var(--surface-2);border:1px solid var(--line);padding:6px 12px;border-radius:8px}
+  /* ---------- EDUCATION + STACK shared rows ---------- */
+  .row{display:grid;grid-template-columns:200px 1fr;gap:40px;padding:26px 0;border-top:1px solid var(--line)}
+  .row:last-child{border-bottom:1px solid var(--line)}
+  .row .k{font-family:var(--font-mono);font-size:.8rem;color:var(--muted)}
+  .row .v h3{font-size:1.15rem;font-weight:600;margin-bottom:4px}
+  .row .v p{font-size:.92rem;color:var(--muted)}
+  .row .v .stack-items{font-family:var(--font-mono);font-size:.86rem;color:var(--ink);line-height:1.9}
 
   /* ---------- CONTACT ---------- */
-  .contact{text-align:center;padding-bottom:60px}
-  .contact h2{font-size:clamp(2rem,5vw,3.2rem);margin-bottom:18px}
-  .contact p{color:var(--muted);max-width:50ch;margin:0 auto 34px}
-  .contact-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-  .contact-info{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;margin-top:38px;font-family:var(--font-mono);font-size:.84rem;color:var(--muted)}
-  .contact-info a:hover{color:var(--indigo)}
+  .contact h2{font-size:clamp(2.4rem,7vw,4.5rem);font-weight:500;letter-spacing:-.03em;margin:18px 0 28px;max-width:14ch}
+  .contact p{font-size:1.1rem;color:var(--muted);max-width:52ch;margin-bottom:40px}
+  .contact-lines{display:flex;flex-direction:column;gap:4px}
+  .big-link{font-family:var(--font-serif);font-size:clamp(1.4rem,4vw,2.2rem);font-weight:400;color:var(--ink);width:fit-content;border-bottom:1px solid transparent;transition:border-color .2s}
+  .big-link:hover{border-color:var(--ink)}
+  .contact-sub{display:flex;gap:24px;flex-wrap:wrap;margin-top:34px;font-family:var(--font-mono);font-size:.84rem;color:var(--muted)}
+  .contact-sub a:hover{color:var(--accent)}
 
   /* ---------- FOOTER ---------- */
-  footer{border-top:1px solid var(--line);padding:30px 0}
-  .foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-family:var(--font-mono);font-size:.76rem;color:var(--muted)}
-  .foot-inner a:hover{color:var(--indigo)}
+  footer{border-top:1px solid var(--line);padding:34px 0}
+  .foot-inner{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:var(--font-mono);font-size:.76rem;color:var(--faint)}
 
   /* ---------- REVEAL ---------- */
-  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .8s ease}
   .reveal.in{opacity:1;transform:none}
   @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
 
   /* ---------- RESPONSIVE ---------- */
-  @media (max-width:900px){
-    .hero-grid{grid-template-columns:1fr;gap:40px}
-    .plot{order:-1}
-    .about-grid{grid-template-columns:1fr;gap:42px}
-    .proj-grid,.approach-grid,.stack-grid,.edu{grid-template-columns:repeat(2,1fr)}
-    .metrics{grid-template-columns:repeat(2,1fr)}
+  @media (max-width:860px){
+    .about-grid{grid-template-columns:1fr;gap:28px}
+    .xp,.row{grid-template-columns:1fr;gap:14px}
+    .proj-grid{grid-template-columns:1fr;gap:0}
+    .dist-grid{grid-template-columns:1fr;gap:34px}
   }
   @media (max-width:640px){
-    .nav-links{
-      position:fixed;top:64px;left:0;right:0;background:rgba(11,15,23,.97);backdrop-filter:blur(12px);
-      flex-direction:column;align-items:stretch;padding:14px 24px 22px;gap:4px;
-      border-bottom:1px solid var(--line);transform:translateY(-130%);transition:transform .3s;
-    }
+    .nav-links{position:fixed;top:68px;left:0;right:0;background:rgba(250,250,248,.98);backdrop-filter:blur(10px);flex-direction:column;align-items:stretch;padding:14px 28px 22px;gap:2px;border-bottom:1px solid var(--line);transform:translateY(-140%);transition:transform .3s}
     .nav-links.open{transform:translateY(0)}
-    .nav-links a{padding:11px 12px}
+    .nav-links a{padding:11px 0}
+    .nav-links a.active::after{display:none}
+    .nav-cta{margin-top:8px;text-align:center}
     .burger{display:flex}
-    header{padding:120px 0 50px}
-    .proj-grid,.approach-grid,.stack-grid,.edu,.metrics{grid-template-columns:1fr}
-    section{padding:72px 0}
-    .modal{padding:26px}
+    header{padding:128px 0 64px}
+    section{padding:76px 0}
   }
 </style>
 </head>
@@ -292,13 +172,12 @@
 <!-- NAV -->
 <nav id="nav">
   <div class="wrap nav-inner">
-    <a href="#top" class="logo">vincent<b>.b</b></a>
+    <a href="#top" class="logo">Vincent Beausoleil</a>
     <div class="nav-links" id="navLinks">
       <a href="#about">À propos</a>
       <a href="#experience">Expériences</a>
       <a href="#projects">Projets</a>
-      <a href="#approach">Approche</a>
-      <a href="#stack">Stack</a>
+      <a href="#stack">Compétences</a>
       <a href="#contact">Contact</a>
       <a href="mailto:v.beausoleil0208@gmail.com" class="nav-cta">Me contacter</a>
     </div>
@@ -309,297 +188,225 @@
 <!-- HERO -->
 <header id="top">
   <div class="wrap">
-    <div class="hero-grid">
-      <div>
-        <span class="badge"><span class="dot"></span>Disponible · Sept. 2026 · CDI / CDD / Alternance</span>
-        <h1>Vincent Beausoleil</h1>
-        <div class="role">Data Scientist <span class="amp">&</span> Data Analyst</div>
-        <p class="lede">Je transforme la donnée brute en décisions, du <strong>nettoyage des pipelines (ETL)</strong> jusqu'à la <strong>modélisation prédictive</strong> et la <strong>datavisualisation décisionnelle</strong>.</p>
-        <p class="lede">Un socle solide en <strong>mathématiques, statistiques et optimisation</strong> — et un goût pour rendre le complexe lisible.</p>
-        <p class="hero-tags">Séries temporelles · Machine Learning · Recherche opérationnelle · <span>BI &amp; Dataviz</span></p>
-        <div class="cta-row">
-          <a href="#projects" class="btn btn-primary">Voir mes projets →</a>
-          <a href="#contact" class="btn btn-ghost">Me contacter</a>
-        </div>
-      </div>
-
-      <!-- SIGNATURE : courbe de série temporelle + prévision -->
-      <div class="plot reveal">
-        <div class="plot-head">
-          <span>forecast.py — SARIMA(1,1,1)</span>
-          <span class="live">● live</span>
-        </div>
-        <svg viewBox="0 0 600 340" role="img" aria-label="Graphique d'une série temporelle avec prévision">
-          <!-- grille -->
-          <g stroke="rgba(255,255,255,.05)" stroke-width="1">
-            <line x1="20" y1="60" x2="580" y2="60"/>
-            <line x1="20" y1="130" x2="580" y2="130"/>
-            <line x1="20" y1="200" x2="580" y2="200"/>
-            <line x1="20" y1="270" x2="580" y2="270"/>
-          </g>
-          <line x1="380" y1="30" x2="380" y2="300" stroke="rgba(242,182,109,.3)" stroke-width="1" stroke-dasharray="4 5"/>
-          <!-- bande de confiance -->
-          <path d="M380,175 L420,150 L460,128 L500,135 L540,112 L580,122 L580,176 L540,168 L500,190 L460,182 L420,200 L380,175 Z"
-                fill="rgba(242,182,109,.1)"/>
-          <!-- aire sous la courbe historique -->
-          <defs>
-            <linearGradient id="ga" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="rgba(138,160,255,.28)"/>
-              <stop offset="100%" stop-color="rgba(138,160,255,0)"/>
-            </linearGradient>
-          </defs>
-          <path d="M20,300 L60,278 L100,288 L140,246 L180,262 L220,220 L260,236 L300,196 L340,212 L380,175 L380,300 Z" fill="url(#ga)"/>
-          <!-- ligne historique -->
-          <polyline class="draw" points="20,300 60,278 100,288 140,246 180,262 220,220 260,236 300,196 340,212 380,175"
-                    fill="none" stroke="var(--indigo)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <!-- prévision -->
-          <polyline class="draw f" points="380,175 420,162 460,140 500,150 540,124 580,138"
-                    fill="none" stroke="var(--amber)" stroke-width="2.5" stroke-dasharray="6 6" stroke-linecap="round" stroke-linejoin="round"/>
-          <!-- points -->
-          <circle class="pt" style="animation-delay:1.2s" cx="220" cy="220" r="4" fill="var(--indigo)"/>
-          <circle class="pt" style="animation-delay:1.6s" cx="300" cy="196" r="4" fill="var(--indigo)"/>
-          <circle class="pt pt-pulse" style="animation-delay:2.8s" cx="380" cy="175" r="4.5" fill="#fff" stroke="var(--indigo)" stroke-width="2"/>
-          <circle class="pt pt-pulse" style="animation-delay:3.2s" cx="540" cy="124" r="4" fill="var(--amber)"/>
-        </svg>
-        <div class="plot-foot"><span>← historique</span><span>prévision →</span></div>
-      </div>
+    <div class="avail"><span class="dot"></span>Data Scientist &amp; Data Analyst — disponible septembre 2026</div>
+    <h1>Vincent<br>Beausoleil</h1>
+    <p class="statement">Je transforme des données complexes en décisions claires.</p>
+    <p class="sub">Formé aux <strong>mathématiques, aux statistiques et à l'optimisation</strong>, je couvre toute la chaîne data — de la donnée brute au tableau de bord qui aide à décider.</p>
+    <div class="cta-row">
+      <a href="#contact" class="btn-ink">Me contacter</a>
+      <a href="#projects" class="link-arrow">Voir mes projets →</a>
     </div>
-
-    <!-- METRICS -->
-    <div class="metrics reveal">
-      <div class="metric"><div class="num"><em>3</em></div><div class="lbl">missions Data en entreprise</div></div>
-      <div class="metric"><div class="num"><em>2</em></div><div class="lbl">Masters — Data Science &amp; Maths</div></div>
-      <div class="metric"><div class="num"><em>10</em>+</div><div class="lbl">projets ML &amp; Data réalisés</div></div>
-      <div class="metric"><div class="num"><em>6</em> ans</div><div class="lbl">de Python, R &amp; SQL</div></div>
+    <div class="facts">
+      <span><b>2</b> Masters · Data Science &amp; Mathématiques</span>
+      <span><b>3</b> missions data en entreprise</span>
+      <span>Python · R · SQL</span>
+      <span>Angers / Nantes</span>
     </div>
   </div>
 </header>
 
 <!-- ABOUT -->
-<section id="about">
+<section id="about" class="sec-top">
   <div class="wrap">
-    <div class="about-grid">
-      <div class="about-text reveal">
-        <span class="eyebrow">À propos</span>
-        <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);margin:14px 0 22px">Qui suis-je ?</h2>
-        <p>Bientôt diplômé d'un <strong>Master MIASHS — Ingénierie de la Décision &amp; Data Sciences</strong> (UCO Angers), je conçois des solutions data de bout en bout : de l'industrialisation de la collecte au modèle prédictif, jusqu'au tableau de bord qui aide à décider.</p>
+    <div class="about-grid reveal">
+      <div class="label">À propos</div>
+      <div class="about-body">
+        <p>Bientôt diplômé d'un Master MIASHS — Ingénierie de la Décision &amp; Data Sciences (UCO Angers), je conçois des solutions data de bout en bout.</p>
         <p>À travers mes missions chez <strong>GMF · MMA · MAAF</strong>, <strong>Talia Sofop</strong> et <strong>Recorps Med</strong>, j'ai couvert toute la chaîne : architecture cloud SQL/NoSQL, conformité RGPD, séries temporelles (SARIMA), recherche opérationnelle et BI sous Power BI et Qlik Sense.</p>
-        <p>Mon autre particularité : un parcours d'<strong>enseignant des mathématiques</strong> (Master MEEF). Il m'a appris à vulgariser le complexe et à communiquer une analyse avec clarté — un vrai atout pour faire parler la donnée auprès des équipes métier.</p>
+        <p>Mon autre particularité : un parcours d'<strong>enseignant des mathématiques</strong> (Master MEEF). Il m'a appris à vulgariser le complexe et à communiquer une analyse avec clarté — un atout pour faire parler la donnée auprès des équipes métier.</p>
         <p>Je recherche une opportunité en <strong>Data Analyse, Data Science ou Intelligence Artificielle</strong> à partir de septembre 2026.</p>
-        <div class="chips">
-          <span class="chip">🎓 <b>Master</b> Data Science</span>
-          <span class="chip">🎓 <b>Master</b> Maths (MEEF)</span>
-          <span class="chip">📈 Séries temporelles</span>
-          <span class="chip">🇫🇷 Français</span>
-          <span class="chip">🚗 Permis B</span>
-        </div>
-      </div>
-
-      <div class="skills reveal">
-        <h3>Niveaux de compétence</h3>
-        <div class="skill"><div class="skill-top"><span>Mathématiques &amp; Statistiques</span><span>92%</span></div><div class="bar"><i data-w="92"></i></div></div>
-        <div class="skill"><div class="skill-top"><span>Python · R · SQL</span><span>88%</span></div><div class="bar"><i data-w="88"></i></div></div>
-        <div class="skill"><div class="skill-top"><span>Séries temporelles &amp; Optimisation</span><span>85%</span></div><div class="bar"><i data-w="85"></i></div></div>
-        <div class="skill"><div class="skill-top"><span>Power BI · Qlik Sense · Dataviz</span><span>84%</span></div><div class="bar"><i data-w="84"></i></div></div>
-        <div class="skill"><div class="skill-top"><span>Machine Learning &amp; Deep Learning</span><span>80%</span></div><div class="bar"><i data-w="80"></i></div></div>
-        <div class="skill"><div class="skill-top"><span>Agents IA &amp; LLM</span><span>70%</span></div><div class="bar"><i data-w="70"></i></div></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- EXPERIENCE -->
-<section id="experience">
+<section id="experience" class="sec-top">
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow">Parcours</span>
       <h2>Expériences</h2>
-      <p>De l'architecture de données à la modélisation prédictive, en passant par l'enseignement.</p>
     </div>
 
-    <div class="timeline">
-      <div class="tl-item reveal">
-        <div class="tl-card">
-          <div class="tl-meta"><h3>Data Scientist / Analyst</h3><span class="tl-when">2025 – 2026</span></div>
-          <div class="tl-org">GMF · MMA · MAAF — Le Mans</div>
-          <ul>
-            <li><b>Data Preparation &amp; Quality</b> : industrialisation de la collecte et du nettoyage (ETL), automatisation de la détection d'anomalies.</li>
-            <li><b>Analyses statistiques avancées</b> : analyses exploratoires (EDA) et études quantitatives pour modéliser les parcours de formation et anticiper les besoins en compétences.</li>
-            <li><b>Datavisualisation &amp; décisionnel</b> : conception de tableaux de bord stratégiques et de KPIs prédictifs.</li>
-          </ul>
-          <div class="stack-tags"><span class="tag">Python</span><span class="tag">Qlik Sense</span><span class="tag">ETL</span><span class="tag">EDA</span><span class="tag warm">KPIs prédictifs</span></div>
-        </div>
+    <div class="xp reveal">
+      <div class="xp-meta"><div class="yr">2025 – 2026</div><div class="org">GMF · MMA · MAAF — Le Mans</div></div>
+      <div class="xp-body">
+        <h3>Data Scientist / Analyst</h3>
+        <ul>
+          <li><b>Data Preparation &amp; Quality</b> — industrialisation de la collecte et du nettoyage (ETL), automatisation de la détection d'anomalies.</li>
+          <li><b>Analyses statistiques avancées</b> — analyses exploratoires (EDA) et études quantitatives pour modéliser les parcours de formation.</li>
+          <li><b>Datavisualisation &amp; décisionnel</b> — tableaux de bord stratégiques et KPIs prédictifs.</li>
+        </ul>
+        <div class="tags"><span class="tag">Python</span><span class="tag">Qlik Sense</span><span class="tag">ETL</span><span class="tag">EDA</span><span class="tag">KPIs prédictifs</span></div>
       </div>
+    </div>
 
-      <div class="tl-item reveal">
-        <div class="tl-card">
-          <div class="tl-meta"><h3>Data Scientist / Analyst</h3><span class="tl-when">2024 – 2025</span></div>
-          <div class="tl-org">Talia Sofop — Saint-Nazaire</div>
-          <ul>
-            <li><b>Recherche opérationnelle (Python)</b> : algorithme d'optimisation sous contraintes pour la configuration de l'entrepôt et la fluidification des flux.</li>
-            <li><b>Analyses prédictives (Python, Power BI)</b> : modélisation du chiffre d'affaires via séries temporelles SARIMA, déploiement de dashboards de Business Intelligence.</li>
-            <li><b>Analyse quantitative</b> : modélisation de la demande pour optimiser la gestion des stocks de matières premières.</li>
-          </ul>
-          <div class="stack-tags"><span class="tag">Python</span><span class="tag">Power BI</span><span class="tag">SARIMA</span><span class="tag">Recherche opér.</span><span class="tag warm">Business Intelligence</span></div>
-        </div>
+    <div class="xp reveal">
+      <div class="xp-meta"><div class="yr">2024 – 2025</div><div class="org">Talia Sofop — Saint-Nazaire</div></div>
+      <div class="xp-body">
+        <h3>Data Scientist / Analyst</h3>
+        <ul>
+          <li><b>Recherche opérationnelle</b> — algorithme d'optimisation sous contraintes pour la configuration de l'entrepôt et la fluidification des flux.</li>
+          <li><b>Analyses prédictives</b> — modélisation du chiffre d'affaires via séries temporelles SARIMA, dashboards de Business Intelligence.</li>
+          <li><b>Analyse quantitative</b> — modélisation de la demande pour optimiser la gestion des stocks.</li>
+        </ul>
+        <div class="tags"><span class="tag">Python</span><span class="tag">Power BI</span><span class="tag">SARIMA</span><span class="tag">Recherche opér.</span><span class="tag">BI</span></div>
       </div>
+    </div>
 
-      <div class="tl-item reveal">
-        <div class="tl-card">
-          <div class="tl-meta"><h3>Data Architect</h3><span class="tl-when">2023 – 2024</span></div>
-          <div class="tl-org">Recorps Med — Nantes</div>
-          <ul>
-            <li><b>Architecture &amp; infrastructures data</b> : conception et modélisation de l'architecture cloud (SQL/NoSQL) de la plateforme.</li>
-            <li><b>Pipelines ETL</b> : ingestion centralisée des logs de connexion, de l'historique des QCM et des données de paiement.</li>
-            <li><b>Gouvernance &amp; RGPD</b> : politiques de sécurité, gestion des accès (IAM) et conformité RGPD.</li>
-          </ul>
-          <div class="stack-tags"><span class="tag">SQL / NoSQL</span><span class="tag">ETL</span><span class="tag">Cloud</span><span class="tag">IAM</span><span class="tag warm">RGPD</span></div>
-        </div>
+    <div class="xp reveal">
+      <div class="xp-meta"><div class="yr">2023 – 2024</div><div class="org">Recorps Med — Nantes</div></div>
+      <div class="xp-body">
+        <h3>Data Architect</h3>
+        <ul>
+          <li><b>Architecture &amp; infrastructures data</b> — conception et modélisation de l'architecture cloud (SQL/NoSQL) de la plateforme.</li>
+          <li><b>Pipelines ETL</b> — ingestion centralisée des logs de connexion, de l'historique des QCM et des données de paiement.</li>
+          <li><b>Gouvernance &amp; RGPD</b> — politiques de sécurité, gestion des accès (IAM) et conformité RGPD.</li>
+        </ul>
+        <div class="tags"><span class="tag">SQL / NoSQL</span><span class="tag">ETL</span><span class="tag">Cloud</span><span class="tag">IAM</span><span class="tag">RGPD</span></div>
       </div>
+    </div>
 
-      <div class="tl-item reveal">
-        <div class="tl-card">
-          <div class="tl-meta"><h3>Professeur de Mathématiques</h3><span class="tl-when">2022 – 2024</span></div>
-          <div class="tl-org">UCO Angers · Lycée Chevrollier · Recorps Pass — Angers / Nantes</div>
-          <ul>
-            <li><b>Enseignement &amp; accompagnement</b> : cours et soutien du collège au lycée, et auprès d'étudiants en Master 2 MEEF.</li>
-            <li><b>Vulgarisation</b> : réalisation de vidéos pédagogiques en mathématiques pour le site et les réseaux de Recorps Pass.</li>
-          </ul>
-          <div class="stack-tags"><span class="tag warm">Pédagogie</span><span class="tag warm">Vulgarisation</span><span class="tag warm">Communication</span></div>
-        </div>
+    <div class="xp reveal">
+      <div class="xp-meta"><div class="yr">2022 – 2024</div><div class="org">UCO · Lycée Chevrollier · Recorps Pass</div></div>
+      <div class="xp-body">
+        <h3>Professeur de Mathématiques</h3>
+        <ul>
+          <li><b>Enseignement &amp; accompagnement</b> — cours et soutien du collège au lycée, et auprès d'étudiants en Master 2 MEEF.</li>
+          <li><b>Vulgarisation</b> — réalisation de vidéos pédagogiques en mathématiques pour le site et les réseaux de Recorps Pass.</li>
+        </ul>
+        <div class="tags"><span class="tag">Pédagogie</span><span class="tag">Vulgarisation</span><span class="tag">Communication</span></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- PROJECTS -->
-<section id="projects">
+<section id="projects" class="sec-top">
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow">Réalisations</span>
-      <h2>Projets clés</h2>
-      <p>Une sélection de projets data, ML et optimisation. Cliquez pour le détail.</p>
+      <h2>Projets sélectionnés</h2>
     </div>
-
     <div class="proj-grid">
-      <button class="proj reveal" data-modal="m1">
-        <div class="proj-ico">📈</div>
-        <div class="proj-flag">SÉRIES TEMPORELLES</div>
+      <div class="proj reveal">
+        <div class="cat">Séries temporelles</div>
         <h3>Prévision de chiffre d'affaires</h3>
         <p>Modélisation prédictive du CA via SARIMA et déploiement de dashboards de Business Intelligence pour le pilotage.</p>
-        <div class="proj-tags"><span class="tag">SARIMA</span><span class="tag">Power BI</span><span class="tag">Python</span></div>
-        <div class="proj-more">Voir le détail →</div>
-      </button>
-
-      <button class="proj reveal" data-modal="m2">
-        <div class="proj-ico">⚙️</div>
-        <div class="proj-flag">RECHERCHE OPÉRATIONNELLE</div>
+        <div class="tags"><span class="tag">SARIMA</span><span class="tag">Power BI</span><span class="tag">Python</span></div>
+      </div>
+      <div class="proj reveal">
+        <div class="cat">Recherche opérationnelle</div>
         <h3>Optimisation d'entrepôt</h3>
-        <p>Algorithme d'optimisation sous contraintes pour la configuration de l'entrepôt et la fluidification des flux logistiques.</p>
-        <div class="proj-tags"><span class="tag">Python</span><span class="tag">Optimisation</span><span class="tag">Contraintes</span></div>
-        <div class="proj-more">Voir le détail →</div>
-      </button>
-
-      <button class="proj reveal" data-modal="m3">
-        <div class="proj-ico">🛰️</div>
-        <div class="proj-flag">COMPUTER VISION</div>
+        <p>Algorithme d'optimisation sous contraintes pour configurer l'entrepôt et fluidifier les flux logistiques.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">Optimisation</span><span class="tag">Contraintes</span></div>
+      </div>
+      <div class="proj reveal">
+        <div class="cat">Computer Vision</div>
         <h3>Reconnaissance faciale par drône</h3>
-        <p>Pipeline de détection et reconnaissance faciale embarqué sur drône, du traitement d'image à l'identification.</p>
-        <div class="proj-tags"><span class="tag">Vision</span><span class="tag">Python</span><span class="tag">Deep Learning</span></div>
-        <div class="proj-more">Voir le détail →</div>
-      </button>
-
-      <button class="proj reveal" data-modal="m4">
-        <div class="proj-ico">📊</div>
-        <div class="proj-flag">MODÉLISATION STATISTIQUE</div>
+        <p>Pipeline de détection et reconnaissance faciale embarqué, du traitement d'image à l'identification.</p>
+        <div class="tags"><span class="tag">Vision</span><span class="tag">Deep Learning</span><span class="tag">Python</span></div>
+      </div>
+      <div class="proj reveal">
+        <div class="cat">Modélisation statistique</div>
         <h3>Modèles linéaires &amp; régularisation</h3>
         <p>Régression multiple, ACP, Ridge, Lasso, sélection pas à pas, ARIMA / SARIMA — comparaison et interprétation.</p>
-        <div class="proj-tags"><span class="tag">Ridge / Lasso</span><span class="tag">ACP</span><span class="tag">R</span></div>
-        <div class="proj-more">Voir le détail →</div>
-      </button>
-
-      <button class="proj reveal" data-modal="m5">
-        <div class="proj-ico">♟️</div>
-        <div class="proj-flag">IA & ALGORITHMIQUE</div>
+        <div class="tags"><span class="tag">Ridge / Lasso</span><span class="tag">ACP</span><span class="tag">R</span></div>
+      </div>
+      <div class="proj reveal">
+        <div class="cat">IA &amp; algorithmique</div>
         <h3>IA de jeux — Échecs &amp; Hex</h3>
-        <p>Moteurs de jeu intelligents (recherche arborescente, heuristiques) pour les échecs et le Hex.</p>
-        <div class="proj-tags"><span class="tag">Algorithmes</span><span class="tag">IA</span><span class="tag">Python</span></div>
-        <div class="proj-more">Voir le détail →</div>
-      </button>
-
-      <button class="proj reveal" data-modal="m6">
-        <div class="proj-ico">🗃️</div>
-        <div class="proj-flag">APPLICATIF & DATA</div>
+        <p>Moteurs de jeu intelligents fondés sur la recherche arborescente et des heuristiques d'évaluation.</p>
+        <div class="tags"><span class="tag">Algorithmes</span><span class="tag">IA</span><span class="tag">Python</span></div>
+      </div>
+      <div class="proj reveal">
+        <div class="cat">Applicatif &amp; data</div>
         <h3>Application de gestion RH</h3>
-        <p>Conception d'une application de gestion RH et d'un système de gestion de réservation, base de données et interface.</p>
-        <div class="proj-tags"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">App</span></div>
-        <div class="proj-more">Voir le détail →</div>
-      </button>
+        <p>Conception d'une application de gestion RH et d'un système de réservation : base de données et interface.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">App</span></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- APPROACH -->
-<section id="approach">
+<!-- DISTINCTION -->
+<section id="distinction" class="sec-top">
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow">Méthode</span>
       <h2>Ce qui me distingue</h2>
-      <p>Au-delà des outils, une façon de travailler la donnée.</p>
     </div>
-    <div class="approach-grid">
-      <div class="appr reveal"><div class="ic">🧮</div><h3>Rigueur mathématique</h3><p>Une formation poussée en maths, stats et optimisation : je comprends ce qu'il y a sous le capot des modèles, pas seulement comment les appeler.</p></div>
-      <div class="appr reveal"><div class="ic">🗣️</div><h3>Pédagogie &amp; vulgarisation</h3><p>Un parcours d'enseignant qui me permet de traduire l'analyse pour les équipes métier — et de défendre une décision avec clarté.</p></div>
-      <div class="appr reveal"><div class="ic">🔗</div><h3>Vision bout en bout</h3><p>De l'architecture des données et des pipelines ETL jusqu'au dashboard décisionnel : je couvre toute la chaîne, pas un seul maillon.</p></div>
-    </div>
-
-    <div class="sec-head reveal" style="margin-top:64px">
-      <span class="eyebrow">Formations</span>
-      <h2 style="font-size:1.8rem">Diplômes</h2>
-    </div>
-    <div class="edu">
-      <div class="edu-card reveal"><div class="yr">2024 – 2026</div><h3>Master MIASHS</h3><p>Ingénierie de la Décision &amp; Data Sciences — UCO Angers</p></div>
-      <div class="edu-card reveal"><div class="yr">2023 – 2024</div><h3>Master MEEF</h3><p>Enseignement des Mathématiques (2nd degré) — Nantes</p></div>
-      <div class="edu-card reveal"><div class="yr">2020 – 2023</div><h3>Licence MIASHS</h3><p>Maths &amp; Informatique appliquées aux SHS — UCO Nantes &amp; Angers</p></div>
+    <div class="dist-grid">
+      <div class="dist reveal"><h3>Rigueur mathématique</h3><p>Une formation poussée en maths, stats et optimisation : je comprends ce qu'il y a sous le capot des modèles, pas seulement comment les appeler.</p></div>
+      <div class="dist reveal"><h3>Pédagogie &amp; clarté</h3><p>Un parcours d'enseignant qui me permet de traduire l'analyse pour les équipes métier et de défendre une décision avec clarté.</p></div>
+      <div class="dist reveal"><h3>Vision bout en bout</h3><p>De l'architecture des données et des pipelines ETL jusqu'au dashboard décisionnel : je couvre toute la chaîne.</p></div>
     </div>
   </div>
 </section>
 
-<!-- STACK -->
-<section id="stack">
+<!-- STACK + EDUCATION -->
+<section id="stack" class="sec-top">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Outils</span>
-      <h2>Stack technique</h2>
+      <span class="eyebrow">Boîte à outils</span>
+      <h2>Compétences &amp; formation</h2>
     </div>
-    <div class="stack-grid">
-      <div class="stack-col reveal"><h3>⚡ Langages</h3><div class="items"><span>Python</span><span>R</span><span>SQL</span><span>Java</span><span>VBA</span><span>HTML / CSS</span></div></div>
-      <div class="stack-col reveal"><h3>🧠 Data &amp; ML</h3><div class="items"><span>Pandas</span><span>Scikit-learn</span><span>Machine Learning</span><span>Deep Learning</span><span>SARIMA / ARIMA</span></div></div>
-      <div class="stack-col reveal warm"><h3>📊 Dataviz &amp; BI</h3><div class="items"><span>Power BI</span><span>Qlik Sense</span><span>Piwik PRO</span><span>Reporting</span></div></div>
-      <div class="stack-col reveal"><h3>🗄️ Bases &amp; Big Data</h3><div class="items"><span>SQL</span><span>NoSQL</span><span>XML</span><span>ETL</span><span>RGPD / IAM</span></div></div>
-      <div class="stack-col reveal"><h3>🤖 IA</h3><div class="items"><span>Agents IA</span><span>LLM</span></div></div>
-      <div class="stack-col reveal warm"><h3>🎯 Méthodologie</h3><div class="items"><span>Optimisation</span><span>Recherche opér.</span><span>Statistiques</span><span>Pédagogie</span></div></div>
+
+    <div class="row reveal">
+      <div class="k">Langages</div>
+      <div class="v"><div class="stack-items">Python · R · SQL · Java · VBA · HTML / CSS</div></div>
+    </div>
+    <div class="row reveal">
+      <div class="k">Data &amp; ML</div>
+      <div class="v"><div class="stack-items">Pandas · Scikit-learn · Machine Learning · Deep Learning · ARIMA / SARIMA</div></div>
+    </div>
+    <div class="row reveal">
+      <div class="k">Dataviz &amp; BI</div>
+      <div class="v"><div class="stack-items">Power BI · Qlik Sense · Piwik PRO · Reporting</div></div>
+    </div>
+    <div class="row reveal">
+      <div class="k">Bases &amp; Big Data</div>
+      <div class="v"><div class="stack-items">SQL · NoSQL · XML · ETL · RGPD / IAM</div></div>
+    </div>
+    <div class="row reveal">
+      <div class="k">Méthodes</div>
+      <div class="v"><div class="stack-items">Optimisation · Recherche opérationnelle · Statistiques · Agents IA &amp; LLM</div></div>
+    </div>
+
+    <div style="height:64px"></div>
+    <div class="row reveal">
+      <div class="k">2024 – 2026</div>
+      <div class="v"><h3>Master MIASHS</h3><p>Ingénierie de la Décision &amp; Data Sciences — UCO Angers</p></div>
+    </div>
+    <div class="row reveal">
+      <div class="k">2023 – 2024</div>
+      <div class="v"><h3>Master MEEF</h3><p>Enseignement des Mathématiques (2nd degré) — Nantes</p></div>
+    </div>
+    <div class="row reveal">
+      <div class="k">2020 – 2023</div>
+      <div class="v"><h3>Licence MIASHS</h3><p>Maths &amp; Informatique appliquées aux SHS — UCO Nantes &amp; Angers</p></div>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="contact">
+<section id="contact" class="sec-top">
   <div class="wrap">
     <div class="reveal">
-      <span class="eyebrow" style="justify-content:center">Contact</span>
-      <h2>Travaillons ensemble</h2>
-      <p>Disponible à partir de septembre 2026 pour une opportunité en Data Analyse, Data Science ou Intelligence Artificielle. N'hésitez pas à me contacter.</p>
-      <div class="contact-row">
-        <a href="mailto:v.beausoleil0208@gmail.com" class="btn btn-primary">Envoyer un email</a>
-        <a href="tel:+33781737624" class="btn btn-ghost">07 81 73 76 24</a>
-      </div>
-      <div class="contact-info">
-        <a href="mailto:v.beausoleil0208@gmail.com">v.beausoleil0208@gmail.com</a>
-        <span>📍 Angers / Nantes</span>
-        <!-- Remplace les # par tes vrais liens LinkedIn / GitHub -->
-        <a href="#" target="_blank" rel="noopener">LinkedIn ↗</a>
-        <a href="#" target="_blank" rel="noopener">GitHub ↗</a>
+      <span class="eyebrow">Contact</span>
+      <div class="contact">
+        <h2>Travaillons ensemble.</h2>
+        <p>Disponible à partir de septembre 2026 pour une opportunité en Data Analyse, Data Science ou Intelligence Artificielle.</p>
+        <div class="contact-lines">
+          <a href="mailto:v.beausoleil0208@gmail.com" class="big-link">v.beausoleil0208@gmail.com</a>
+          <a href="tel:+33781737624" class="big-link">07 81 73 76 24</a>
+        </div>
+        <div class="contact-sub">
+          <span>Angers / Nantes</span>
+          <!-- Remplace les # par tes vrais liens -->
+          <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="#" target="_blank" rel="noopener">GitHub</a>
+        </div>
       </div>
     </div>
   </div>
@@ -607,116 +414,28 @@
 
 <footer>
   <div class="wrap foot-inner">
-    <span>Vincent Beausoleil · <span id="year"></span></span>
-    <span>Conçu avec rigueur — HTML / CSS / JS</span>
+    <span>Vincent Beausoleil — <span id="year"></span></span>
+    <span>Conçu avec rigueur</span>
   </div>
 </footer>
 
-<!-- MODALS -->
-<div class="modal-bg" id="modalBg">
-  <div class="modal" id="modalBox" role="dialog" aria-modal="true">
-    <button class="modal-close" id="modalClose" aria-label="Fermer">✕</button>
-    <div id="modalContent"></div>
-  </div>
-</div>
-
 <script>
-  // ----- NAV scroll state + mobile -----
-  const nav = document.getElementById('nav');
-  const navLinks = document.getElementById('navLinks');
-  const burger = document.getElementById('burger');
-  addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 10));
-  burger.addEventListener('click', () => navLinks.classList.toggle('open'));
-  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+  const nav=document.getElementById('nav');
+  const navLinks=document.getElementById('navLinks');
+  const burger=document.getElementById('burger');
+  addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>10));
+  burger.addEventListener('click',()=>navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('open')));
 
-  // ----- Year -----
-  document.getElementById('year').textContent = new Date().getFullYear();
+  document.getElementById('year').textContent=new Date().getFullYear();
 
-  // ----- Reveal on scroll -----
-  const revIO = new IntersectionObserver((es) => {
-    es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); revIO.unobserve(e.target); } });
-  }, {threshold:.12});
-  document.querySelectorAll('.reveal').forEach(el => revIO.observe(el));
+  const revIO=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');revIO.unobserve(e.target);}});},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>revIO.observe(el));
 
-  // ----- Skill bars -----
-  const barIO = new IntersectionObserver((es) => {
-    es.forEach(e => { if (e.isIntersecting){ e.target.style.width = e.target.dataset.w + '%'; barIO.unobserve(e.target); } });
-  }, {threshold:.4});
-  document.querySelectorAll('.bar i').forEach(b => barIO.observe(b));
-
-  // ----- Active nav link -----
-  const secs = [...document.querySelectorAll('section[id]')];
-  const linkFor = id => navLinks.querySelector('a[href="#'+id+'"]');
-  const navIO = new IntersectionObserver((es) => {
-    es.forEach(e => {
-      const l = linkFor(e.target.id);
-      if (l && e.isIntersecting){
-        navLinks.querySelectorAll('a').forEach(a => a.classList.remove('active'));
-        l.classList.add('active');
-      }
-    });
-  }, {rootMargin:'-45% 0px -50% 0px'});
-  secs.forEach(s => navIO.observe(s));
-
-  // ----- Modals -----
-  const data = {
-    m1:{ico:'📈',title:'Prévision de chiffre d\'affaires',sub:'Séries temporelles · Business Intelligence',body:`
-      <h4>Contexte</h4><p>Anticiper l'évolution du chiffre d'affaires pour piloter la production et les stocks, et fournir aux décideurs une vision claire et chiffrée du futur proche.</p>
-      <h4>Approche</h4><ul>
-        <li><b>Analyse de la série</b> : tendance, saisonnalité et stationnarité, différenciation et choix des ordres du modèle.</li>
-        <li><b>Modélisation SARIMA</b> : ajustement et validation du modèle saisonnier, intervalles de prévision.</li>
-        <li><b>Restitution BI</b> : déploiement de dashboards de Business Intelligence pour suivre prévisions et écarts.</li></ul>
-      <h4>Stack</h4><p>Python · SARIMA · Power BI · Pandas</p>`},
-    m2:{ico:'⚙️',title:'Optimisation d\'entrepôt',sub:'Recherche opérationnelle · Optimisation sous contraintes',body:`
-      <h4>Problème</h4><p>Configurer l'entrepôt et organiser les flux pour réduire les déplacements et fluidifier la logistique, sous de fortes contraintes d'espace et d'organisation.</p>
-      <h4>Solution</h4><ul>
-        <li><b>Modélisation des contraintes</b> : formalisation du problème (placements, flux, capacités) en programme d'optimisation.</li>
-        <li><b>Algorithme d'optimisation</b> : recherche d'une configuration minimisant les coûts de déplacement.</li>
-        <li><b>Analyse quantitative</b> : modélisation de la demande pour ajuster la gestion des stocks de matières premières.</li></ul>
-      <h4>Stack</h4><p>Python · Optimisation combinatoire · Recherche opérationnelle</p>`},
-    m3:{ico:'🛰️',title:'Reconnaissance faciale par drône',sub:'Computer Vision · Deep Learning',body:`
-      <h4>Objectif</h4><p>Concevoir un pipeline capable de détecter et reconnaître des visages à partir d'un flux vidéo embarqué sur drône.</p>
-      <h4>Démarche</h4><ul>
-        <li><b>Traitement d'image</b> : détection des visages et prétraitement du flux.</li>
-        <li><b>Reconnaissance</b> : extraction de caractéristiques et identification.</li>
-        <li><b>Contraintes embarquées</b> : prise en compte de la qualité variable des images et du temps de traitement.</li></ul>
-      <h4>Stack</h4><p>Python · Computer Vision · Deep Learning</p>`},
-    m4:{ico:'📊',title:'Modèles linéaires & régularisation',sub:'Modélisation statistique',body:`
-      <h4>Objectif</h4><p>Construire, comparer et interpréter une famille de modèles statistiques pour expliquer et prédire, en maîtrisant le compromis biais-variance.</p>
-      <h4>Méthodes</h4><ul>
-        <li><b>Régression multiple</b> et sélection de variables pas à pas (stepwise).</li>
-        <li><b>Régularisation</b> : Ridge et Lasso pour limiter le surapprentissage.</li>
-        <li><b>Réduction de dimension</b> : Analyse en Composantes Principales (ACP).</li>
-        <li><b>Séries temporelles</b> : ARIMA et SARIMA.</li></ul>
-      <h4>Stack</h4><p>R · Python · Statistiques</p>`},
-    m5:{ico:'♟️',title:'IA de jeux — Échecs & Hex',sub:'IA · Algorithmique',body:`
-      <h4>Objectif</h4><p>Développer des moteurs de jeu capables de jouer aux échecs et au Hex avec un bon niveau de décision.</p>
-      <h4>Approche</h4><ul>
-        <li><b>Recherche arborescente</b> : exploration des coups possibles et évaluation des positions.</li>
-        <li><b>Heuristiques</b> : fonctions d'évaluation propres à chaque jeu.</li>
-        <li><b>Optimisation</b> : élagage et gestion du temps de calcul.</li></ul>
-      <h4>Stack</h4><p>Python · Algorithmes de recherche · IA</p>`},
-    m6:{ico:'🗃️',title:'Application de gestion RH',sub:'Développement applicatif · Bases de données',body:`
-      <h4>Objectif</h4><p>Concevoir des outils applicatifs concrets : une application de gestion RH et un système de gestion de réservation.</p>
-      <h4>Réalisation</h4><ul>
-        <li><b>Modélisation de la base</b> : structuration des données et des relations.</li>
-        <li><b>Logique métier</b> : gestion des enregistrements, des réservations et des accès.</li>
-        <li><b>Interface</b> : parcours utilisateur simple et fonctionnel.</li></ul>
-      <h4>Stack</h4><p>Python · SQL · Conception applicative</p>`}
-  };
-  const modalBg = document.getElementById('modalBg');
-  const modalContent = document.getElementById('modalContent');
-  function openModal(k){
-    const d = data[k]; if(!d) return;
-    modalContent.innerHTML = '<div class="modal-ico">'+d.ico+'</div><h3>'+d.title+'</h3><div class="m-sub">'+d.sub+'</div>'+d.body;
-    modalBg.classList.add('open');
-    document.body.style.overflow='hidden';
-  }
-  function closeModal(){ modalBg.classList.remove('open'); document.body.style.overflow=''; }
-  document.querySelectorAll('.proj').forEach(p => p.addEventListener('click', () => openModal(p.dataset.modal)));
-  document.getElementById('modalClose').addEventListener('click', closeModal);
-  modalBg.addEventListener('click', e => { if(e.target === modalBg) closeModal(); });
-  addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+  const secs=[...document.querySelectorAll('section[id]')];
+  const linkFor=id=>navLinks.querySelector('a[href="#'+id+'"]');
+  const navIO=new IntersectionObserver((es)=>{es.forEach(e=>{const l=linkFor(e.target.id);if(l&&e.isIntersecting){navLinks.querySelectorAll('a').forEach(a=>a.classList.remove('active'));l.classList.add('active');}});},{rootMargin:'-45% 0px -50% 0px'});
+  secs.forEach(s=>navIO.observe(s));
 </script>
 </body>
 </html>
